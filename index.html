@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="weather">
+        <div class="search">
+            <input type="text" class="input-box" placeholder="Enter Your City Name" spellcheck="false">
+            <button class="search-button">
+                <img src="images/search.png" class="search-icon">
+            </button>
+        </div>
+        <div class="error">
+            <p>Enter a Correct City Name</p>
+        </div>
+        <div class="weather-box">
+            <div class="weather-image">
+                <img src="images/clear.png" width="200px" class="weather-img">
+                <p class="description">Overcast Clouds</p>
+            </div>
+            <div class="weather-deatils">
+                <h1>27°C</h1>
+                <h2>New York</h2>
+            </div>
+            <div class="details">
+                <div class="humidity">
+                    <div class="col1">
+                        <img src="images/humidity.png" class="humidity-icon">
+                    </div>
+                    <div class="col2">
+                        <h3>64%</h3>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="wind">
+                    <div class="col3">
+                        <img src="images/wind.png" class="wind-icon">
+                    </div>
+                    <div class="col4">
+                        <h3>18km/h</h3>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const apiUrl = 'http://api.openweathermap.org/data/2.5/weather?units=metric&q=';
+        const apiKey = '766253fec1a27ad47179045a17b53d75';
+
+        async function weather(city) {
+
+            let api = await fetch(apiUrl + city + `&APPID=${apiKey}`)
+                .then((res => res.json()))
+            console.log(api)
+
+            if (api.name == city) {
+                document.querySelector('.weather-deatils h1').innerHTML = Math.round(api.main.temp) + '°C'
+                document.querySelector('.description').innerHTML = api.weather[0].description
+                document.querySelector('.weather-deatils h2').innerHTML = api.name
+                document.querySelector('.col2 h3').innerHTML = api.main.humidity + ' %'
+                document.querySelector('.col4 h3').innerHTML = api.wind.speed + ' km/h'
+
+                let weatherImg = document.querySelector('.weather-img')
+
+                if (api.weather[0].main == 'Clouds') {
+                    weatherImg.src = 'images/clouds.png'
+                }
+                else if (api.weather[0].main == 'Rain') {
+                    weatherImg.src = 'images/rain.png'
+                }
+                else if (api.weather[0].main == 'Wind') {
+                    weatherImg.src = 'images/wind.png'
+                }
+                else if (api.weather[0].main == 'Snow') {
+                    weatherImg.src = 'images/snow.png'
+                }
+                else if (api.weather[0].main == 'Mist') {
+                    weatherImg.src = 'images/mist.png'
+                }
+                else if (api.weather[0].main == 'Drizzle') {
+                    weatherImg.src = 'images/drizzle.png'
+                }
+                else if (api.weather[0].main == 'Clear') {
+                    weatherImg.src = 'images/clear.png'
+                }
+                document.querySelector('.error').style.display = 'none'
+                document.querySelector('.weather-box').style.display = 'block'
+            }
+
+            else {
+                document.querySelector('.error').style.display = 'block'
+                document.querySelector('.weather-box').style.display = 'none'
+            }
+        }
+
+        let searchButton = document.querySelector('.search-button')
+
+        searchButton.addEventListener('click', () => {
+            let inputBox = document.querySelector('.input-box').value;
+            weather(inputBox);
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: poppins, sans-serif;
+}
+
+body {
+    background-color: #222;
+    
+}
+
+.weather {
+    height: auto;
+    width: 90%;
+    max-width: 350px;
+    background: linear-gradient(135deg, #7a7fba, #11c37c);
+    margin: 100px auto;
+    padding: 20px;
+    padding-top: 25px;
+    border-radius: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.search {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px;
+}
+
+.input-box {
+    width: 70%;
+    padding: 15px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+}
+
+.search-button {
+    width: 50px;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+}
+
+.search-icon {
+    width: 15px;
+    padding: 10px;
+}
+
+.error {
+    margin-top: 10px;
+    text-align: start;
+    margin-left: 25px;
+    display: none;
+}
+
+.description {
+    margin-bottom: 10px;
+}
+
+.details{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.humidity {
+    display: flex;
+}
+
+.humidity-icon {
+    width: 40px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.wind {
+    display: flex;
+}
+
+.wind-icon {
+    width: 40px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
